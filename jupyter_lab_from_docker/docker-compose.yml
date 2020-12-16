@@ -1,0 +1,20 @@
+# docker-composeの書き方のバージョン
+version: "3"
+services:
+  notebook:
+    # dockerで準備されているコンテナイメージ
+    # https://hub.docker.com/r/jupyter/datascience-notebook
+    image: jupyter/datascience-notebook
+    # ポート設定("ホスト：ゲスト「コンテナ」")
+    ports:
+      - "8888:8888"
+    # (ホスト：ゲスト)でのディレクトリの接続
+    # ディレクトリ内のファイル操作が共有されるイメージ
+    volumes:
+      - ./work:/home/jovyan/work
+    # コンテナに渡す環境変数の設定
+    # jupter_enable_labをyesで渡すと、jupter_notebookではなくjupter_labが動く
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+    # jupter_labに接続するコマンドを実行する
+    command: start-notebook.sh --NotebookApp.token='123'
