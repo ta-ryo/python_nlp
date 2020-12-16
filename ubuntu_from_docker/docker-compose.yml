@@ -1,0 +1,9 @@
+version: "3"
+services:
+  workspace:
+    build: ./
+    volumes:
+      - ./work:/work
+    working_dir: /work
+    # ttyをTrueにしておくとコンテナが起動し続ける
+    tty: true
